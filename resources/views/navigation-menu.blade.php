@@ -140,16 +140,14 @@
                 @endif
             </div>
             <div class="mt-3 space-y-1">
-                {{--
-                    <x-responsive-nav-link href="{{ route('intro') }}" :active="request()->routeIs('intro')">
-                        {{ __('INTRO') }}
-                    </x-responsive-nav-link>
-                --}}
-                <x-responsive-nav-link href="{{ route('lessons', ['lesson' => 'vocal']) }}" :active="request()->is('lessons/vocal')">
-                    {{ __('VOCAL') }}
+                <x-responsive-nav-link href="{{ route('lessons', ['lesson' => 'high-school-entrance']) }}" :active="request()->is('lessons/high-school-entrance') || request()->is('lessons/high-school-entrance/*')">
+                        {{ __('예고 입시반') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link href="{{ route('lessons', ['lesson' => 'dance']) }}" :active="request()->is('lessons/dance')">
-                    {{ __('DANCE') }}
+                <x-responsive-nav-link href="{{ route('lessons', ['lesson' => 'college-entrance']) }}" :active="request()->is('lessons/college-entrance') || request()->is('lessons/college-entrance/*')">
+                    {{ __('대학입시반') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('lessons', ['lesson' => 'basic']) }}" :active="request()->is('lessons/basic') || request()->is('lessons/basic/*')">
+                    {{ __('연기기초*오디션반') }}
                 </x-responsive-nav-link>
                 @auth
                     <!-- Account Management -->
