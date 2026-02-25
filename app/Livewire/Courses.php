@@ -11,39 +11,22 @@ class Courses extends Component
     use WithFileUploads;
 
     public $admin;
-    public $photoModal;
+    public $video;
     public $selected_lesson;
-    public $mainpage_lesson_photo;
-    public $img_path = '';
-    public $photo;
-    public $photoPreview;
-    public function modify($lesson_id, $id)
+    public $videoModal;
+    public function addVideo($id)
     {
-        $this->reset(['photoPreview']);
-        $this->selected_lesson = Lesson::find($lesson_id);
-        $this->mainpage_lesson_photo = $this->selected_lesson->mainpage_lesson_photos()->skip($id-1)->first();
-        if($this->mainpage_lesson_photo)
-        {
-            $this->img_path = $this->mainpage_lesson_photo->img_path;
-        }
-        $this->photoModal = true;
+        $this->selected_lesson = Lesson::find($id);
+        $this->videoModal = true;
     }
     public function save()
     {
-        if($this->mainpage_lesson_photo)
-        {
-            Storage::disk('public')->delete(($this->mainpage_lesson_photo->img_path));
-            $path = $this->photo->storePublicly('lessons', 'public');
-            $this->mainpage_lesson_photo->update(['img_path' => $path]);
-        }
-        else
-        {
-            $path = $this->photo->storePublicly('lessons', 'public');
-            $this->selected_lesson->mainpage_lesson_photos()->create([
-                'img_path' => $path
-            ]);
-        }
-        $this->reset(['photoModal', 'selected_lesson', 'img_path', 'photo', 'photoPreview']);
+        $validated = $this->validate([ 
+            'video' => 'required',
+        ]);
+        $path = $this->video->storePublicly('tuitions', 'public');
+        $this->selected_lesson->lesson_tuition_videos()->create(['video_path' => $path]);
+        $this->reset(['videoModal', 'video', 'selected_lesson']);
     }
     public function mount()
     {

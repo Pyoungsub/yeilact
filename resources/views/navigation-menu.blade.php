@@ -11,16 +11,14 @@
                 </div>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    {{--
-                        <x-nav-link href="{{ route('intro') }}" :active="request()->routeIs('intro')">
-                            {{ __('INTRO') }}
-                        </x-nav-link>
-                    --}}
-                    <x-nav-link href="{{ route('lessons', ['lesson' => 'vocal']) }}" :active="request()->is('lessons/vocal') || request()->is('lessons/vocal/*')">
-                        {{ __('VOCAL') }}
+                    <x-nav-link href="{{ route('lessons', ['lesson' => 'high-school-entrance']) }}" :active="request()->is('lessons/high-school-entrance') || request()->is('lessons/high-school-entrance/*')">
+                        {{ __('예고 입시반') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('lessons', ['lesson' => 'dance']) }}" :active="request()->is('lessons/dance') || request()->is('lessons/dance/*')">
-                        {{ __('DANCE') }}
+                    <x-nav-link href="{{ route('lessons', ['lesson' => 'college-entrance']) }}" :active="request()->is('lessons/college-entrance') || request()->is('lessons/college-entrance/*')">
+                        {{ __('대학입시반') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('lessons', ['lesson' => 'basic']) }}" :active="request()->is('lessons/basic') || request()->is('lessons/basic/*')">
+                        {{ __('연기기초*오디션반') }}
                     </x-nav-link>
                 </div>
             </div>

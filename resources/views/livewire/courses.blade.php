@@ -1,240 +1,107 @@
 <div class="mt-12 max-w-5xl mx-auto">
-    <div class="grid gap-8">
-        @foreach ($lessons as $lesson)
-            @if($lesson->lesson == 'act')
-                <div class="py-6 px-4 sm:p-6 md:py-10 md:px-8 bg-white border rounded-lg shadow-lg">
-                    <div class="max-w-4xl mx-auto grid grid-cols-1 lg:max-w-5xl lg:gap-x-20 lg:grid-cols-2">
-                        <div class="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1">
-                            <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">{{ $lesson->lesson_ko }}</h1>
-                            <p class="text-sm leading-4 font-medium text-white sm:text-slate-500 dark:sm:text-slate-400">2층 연습실</p>
-                        </div>
-                        <div class="grid gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0">
-                            @if($admin)
-                                <div class="relative sm:col-span-4 w-full h-60 bg-cover bg-center bg-no-repeat rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full" style="background-image:url({{ $lesson->mainpage_lesson_photos->first() ? asset('storage/'.$lesson->mainpage_lesson_photos->first()->img_path ) :  asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }}" loading="lazy">
-                                    <button class="absolute right-0 p-2 bg-white rounded border" wire:click="modify({{$lesson->id}}, 1)">{{ __('수정') }}</button>
-                                </div>
-                            @else
-                                <a href="https://www.yeilactor.co.kr/" class="sm:col-span-4">
-                                    <div class="relative w-full h-60 bg-cover bg-center bg-no-repeat rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full" style="background-image:url({{ $lesson->mainpage_lesson_photos->first() ? asset('storage/'.$lesson->mainpage_lesson_photos->first()->img_path ) :  asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }}" loading="lazy">
-                                        <h1 class="block sm:hidden absolute top-4 left-0 text-2xl font-bold bg-black/30 text-white rounded-sm px-1">
-                                            {{ $lesson->lesson_ko }}
-                                        </h1>
-                                    </div>
-                                </a>
-                            @endif
-                            <div class="relative hidden w-full h-52 rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:row-start-2 lg:col-span-2 lg:h-32">
-                                <div
-                                    class="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg"
-                                    style="background-image:url({{ $lesson->mainpage_lesson_photos->skip(1)->first() 
-                                        ? asset('storage/'.$lesson->mainpage_lesson_photos->skip(1)->first()->img_path ) 
-                                        : asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }})">
-                                </div>
-                                @unless($admin)
-                                    <a href="https://www.yeilactor.co.kr/"
-                                    class="absolute inset-0 z-10">
-                                    </a>
-                                @endunless
-                                @if($admin)
-                                    <button
-                                        type="button"
-                                        wire:click="modify({{$lesson->id}}, 2)"
-                                        class="absolute top-2 right-2 z-20 p-2 bg-white rounded border shadow"
-                                    >
-                                        {{ __('수정') }}
-                                    </button>
-                                @endif
+    @foreach ($lessons as $lesson)
+        <div class="mb-12">
+            <div class="flex gap-2 items-center mb-4">
+                <h1 class="text-2xl font-bold">
+                    {{ $lesson->lesson_ko }}
+                </h1>
+                @if($admin)
+                    <x-button wire:click="addVideo({{ $lesson->id }})">
+                        영상추가
+                    </x-button>
+                @endif
+            </div>
+            <div class="py-4 px-2 max-w-5xl mx-auto"
+                x-data="{swiper:null}"
+                x-init="
+                    swiper = new Swiper($refs.container, {
+                        slidesPerView: 1.3,
+                        spaceBetween: 30,
+                        breakpoints: {
+                            640: { // sm breakpoint
+                                slidesPerView: 1.5,
+                                spaceBetween: 30,
+                            },
+                            768: { // md breakpoint
+                                slidesPerView: 2.3,
+                                spaceBetween: 30,
+                            },
+                            1024: { // lg breakpoint
+                                slidesPerView: 2.5,
+                                spaceBetween: 30,
+                            },
+                            1280: { // xl breakpoint
+                                slidesPerView: 3.3,
+                                spaceBetween: 30,
+                            },
+                            1536: { // 2xl breakpoint
+                                slidesPerView: 3.5,
+                                spaceBetween: 30,
+                            }
+                        },
+                    });
+                "
+            >
+                <div x-ref="container" class="swiper w-full overflow-hidden">
+                    <div class="swiper-wrapper">
+                        @foreach($lesson->lesson_tuition_videos as $lesson_tuition_video)
+                            <div class="swiper-slide relative">
+                                @auth
+                                    @if(auth()->user()->admin)
+                                        <div class="flex items-cetner gap-2 absolute top-0 right-0 z-20">
+                                            <button class="bg-white rounded" wire:click="modifyIdolVideo({{$lesson_tuition_video->id}})">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="arcs"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
+                                            </button>
+                                            <button class="bg-white rounded" wire:click="deleteIdolVideo({{$lesson_tuition_video->id}})">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                            </button>
+                                        </div>
+                                    @endif
+                                @endauth
+                                {{--<x-video source="{{ $lesson_tuition_video->video_path }}" />--}}
+                                <x-rectangle-video source="{{ $lesson_tuition_video->video_path }}" />
+                                {{--<x-square-video source="{{ $lesson_tuition_video->video_path }}" />--}}
                             </div>
-                            <div class="relative hidden w-full h-52 rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:row-start-2 lg:col-span-2 lg:h-32">
-                                <div
-                                    class="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg"
-                                    style="background-image:url({{ $lesson->mainpage_lesson_photos->skip(2)->first() 
-                                        ? asset('storage/'.$lesson->mainpage_lesson_photos->skip(2)->first()->img_path ) 
-                                        : asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }})">
-                                </div>
-                                @unless($admin)
-                                    <a href="https://www.yeilactor.co.kr/" class="absolute inset-0 z-10"></a>
-                                @endunless
-                                @if($admin)
-                                    <button
-                                        type="button"
-                                        wire:click="modify({{$lesson->id}}, 3)"
-                                        class="absolute top-2 right-2 z-20 p-2 bg-white rounded border shadow"
-                                    >
-                                        {{ __('수정') }}
-                                    </button>
-                                @endif
-                            </div>
-                        </div>
-                        <dl class="mt-4 text-xs font-medium flex items-center row-start-2 sm:mt-1 sm:row-start-3 md:mt-2.5 lg:row-start-2">
-                            <dt class="sr-only">Reviews</dt>
-                            <dd class="text-indigo-600 flex items-center dark:text-indigo-400">
-                                <svg width="24" height="24" fill="none" aria-hidden="true" class="mr-1 stroke-current dark:stroke-indigo-500">
-                                <path d="m12 5 2 5h5l-4 4 2.103 5L12 16l-5.103 3L9 14l-4-4h5l2-5Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <span>4.89 <span class="text-slate-400 font-normal">(128)</span></span>
-                            </dd>
-                            <dt class="sr-only">Location</dt>
-                            <dd class="flex items-center">
-                                <svg width="2" height="2" aria-hidden="true" fill="currentColor" class="mx-3 text-slate-300">
-                                <circle cx="1" cy="1" r="1" />
-                                </svg>
-                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 text-slate-400 dark:text-slate-500" aria-hidden="true">
-                                <path d="M18 11.034C18 14.897 12 19 12 19s-6-4.103-6-7.966C6 7.655 8.819 5 12 5s6 2.655 6 6.034Z" />
-                                <path d="M14 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
-                                </svg>
-                                목동점
-                            </dd>
-                        </dl>
-                        <div class="mt-4 col-start-1 row-start-3 self-center sm:mt-0 sm:col-start-2 sm:row-start-2 sm:row-span-2 lg:mt-6 lg:col-start-1 lg:row-start-3 lg:row-end-4">
-                            <a href="https://www.yeilactor.co.kr/" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">{{ $lesson->lesson_ko }} 더 알아보기</a>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            @else
-                <div class="py-6 px-4 sm:p-6 md:py-10 md:px-8 bg-white border rounded-lg shadow-lg">
-                    <div class="max-w-4xl mx-auto grid grid-cols-1 lg:max-w-5xl lg:gap-x-20 lg:grid-cols-2">
-                        <div class="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1">
-                            <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">{{ $lesson->lesson_ko }}</h1>
-                            <p class="text-sm leading-4 font-medium text-white sm:text-slate-500 dark:sm:text-slate-400">2층 연습실</p>
-                        </div>
-                        <div class="grid gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0">
-                            @if($admin)
-                                <div class="relative sm:col-span-4 w-full h-60 bg-cover bg-center bg-no-repeat rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full" style="background-image:url({{ $lesson->mainpage_lesson_photos->first() ? asset('storage/'.$lesson->mainpage_lesson_photos->first()->img_path ) :  asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }}" loading="lazy">
-                                    <button class="absolute right-0 p-2 bg-white rounded border" wire:click="modify({{$lesson->id}}, 1)">{{ __('수정') }}</button>
-                                </div>
-                            @else
-                                <a href="{{ route('lessons', ['lesson' => $lesson->lesson]) }}" class="sm:col-span-4">
-                                    <div class="relative w-full h-60 bg-cover bg-center bg-no-repeat rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full" style="background-image:url({{ $lesson->mainpage_lesson_photos->first() ? asset('storage/'.$lesson->mainpage_lesson_photos->first()->img_path ) :  asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }}" loading="lazy">
-                                        <h1 class="block sm:hidden absolute top-4 left-0 text-2xl font-bold bg-black/30 text-white rounded-sm px-1">
-                                            {{ $lesson->lesson_ko }}
-                                        </h1>
-                                    </div>
-                                </a>
-                            @endif
-                            <div class="relative hidden w-full h-52 rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:row-start-2 lg:col-span-2 lg:h-32">
-                                <div
-                                    class="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg"
-                                    style="background-image:url({{ $lesson->mainpage_lesson_photos->skip(1)->first() 
-                                        ? asset('storage/'.$lesson->mainpage_lesson_photos->skip(1)->first()->img_path ) 
-                                        : asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }})">
-                                </div>
-                                @unless($admin)
-                                    <a href="{{ route('lessons', ['lesson' => $lesson->lesson]) }}"
-                                    class="absolute inset-0 z-10">
-                                    </a>
-                                @endunless
-                                @if($admin)
-                                    <button
-                                        type="button"
-                                        wire:click="modify({{$lesson->id}}, 2)"
-                                        class="absolute top-2 right-2 z-20 p-2 bg-white rounded border shadow"
-                                    >
-                                        {{ __('수정') }}
-                                    </button>
-                                @endif
-                            </div>
-                            <div class="relative hidden w-full h-52 rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:row-start-2 lg:col-span-2 lg:h-32">
-                                <div
-                                    class="w-full h-full bg-cover bg-center bg-no-repeat rounded-lg"
-                                    style="background-image:url({{ $lesson->mainpage_lesson_photos->skip(2)->first() 
-                                        ? asset('storage/'.$lesson->mainpage_lesson_photos->skip(2)->first()->img_path ) 
-                                        : asset('storage/vocal/mNvXDdVAhpyDQWQSRBm3Ekt6xKBopMye5NqqKiut.png') }})">
-                                </div>
-                                @unless($admin)
-                                    <a href="{{ route('lessons', ['lesson' => $lesson->lesson]) }}" class="absolute inset-0 z-10"></a>
-                                @endunless
-                                @if($admin)
-                                    <button
-                                        type="button"
-                                        wire:click="modify({{$lesson->id}}, 3)"
-                                        class="absolute top-2 right-2 z-20 p-2 bg-white rounded border shadow"
-                                    >
-                                        {{ __('수정') }}
-                                    </button>
-                                @endif
-                            </div>
-                        </div>
-                        <dl class="mt-4 text-xs font-medium flex items-center row-start-2 sm:mt-1 sm:row-start-3 md:mt-2.5 lg:row-start-2">
-                            <dt class="sr-only">Reviews</dt>
-                            <dd class="text-indigo-600 flex items-center dark:text-indigo-400">
-                                <svg width="24" height="24" fill="none" aria-hidden="true" class="mr-1 stroke-current dark:stroke-indigo-500">
-                                <path d="m12 5 2 5h5l-4 4 2.103 5L12 16l-5.103 3L9 14l-4-4h5l2-5Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <span>4.89 <span class="text-slate-400 font-normal">(128)</span></span>
-                            </dd>
-                            <dt class="sr-only">Location</dt>
-                            <dd class="flex items-center">
-                                <svg width="2" height="2" aria-hidden="true" fill="currentColor" class="mx-3 text-slate-300">
-                                <circle cx="1" cy="1" r="1" />
-                                </svg>
-                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 text-slate-400 dark:text-slate-500" aria-hidden="true">
-                                <path d="M18 11.034C18 14.897 12 19 12 19s-6-4.103-6-7.966C6 7.655 8.819 5 12 5s6 2.655 6 6.034Z" />
-                                <path d="M14 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
-                                </svg>
-                                목동점
-                            </dd>
-                        </dl>
-                        <div class="mt-4 col-start-1 row-start-3 self-center sm:mt-0 sm:col-start-2 sm:row-start-2 sm:row-span-2 lg:mt-6 lg:col-start-1 lg:row-start-3 lg:row-end-4">
-                            <a href="{{ route('lessons', ['lesson' => $lesson->lesson]) }}" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">{{ $lesson->lesson_ko }} 더 알아보기</a>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        @endforeach
-        
-    </div>
+            </div>
+        </div>
+    @endforeach
     <!-- Token Value Modal -->
-    <x-dialog-modal wire:model="photoModal">
+    <x-dialog-modal wire:model="videoModal">
         <x-slot name="title">
-           메인페이지 이미지 관리
+           메인페이지 동영상 관리
         </x-slot>
 
         <x-slot name="content">
-            <div class="grid sm:grid-cols-2 gap-8"
-                x-data="{
-                    photoPreview: $wire.entangle('photoPreview')
-                }"
+            <div x-data="{ uploading: false, progress: 0 }"
+                x-on:livewire-upload-start="uploading = true"
+                x-on:livewire-upload-finish="uploading = false"
+                x-on:livewire-upload-cancel="uploading = false"
+                x-on:livewire-upload-error="uploading = false"
+                x-on:livewire-upload-progress="progress = $event.detail.progress"
+                class=""
             >
-                <div class="">
-                    <!-- Profile Photo File Input -->
-                    <input type="file" id="photo" class="hidden"
-                        wire:model.live="photo"
-                        x-ref="photo"
-                        x-on:change="
-                            photoName = $refs.photo.files[0].name;
-                            const reader = new FileReader();
-                            reader.onload = (e) => {
-                                photoPreview = e.target.result;
-                            };
-                            reader.readAsDataURL($refs.photo.files[0]);
-                        "
-                    />
-                    <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                        {{ __('새 사진 선택') }}
-                    </x-secondary-button>
+                <x-label for="video" value="링크" />
+                <x-input accept="video/*" id="video" type="file" class="w-full block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" 
+                wire:model="video" placeholder="url을 입력해주세요" />
+                <div wire:loading wire:target="video">Uploading...</div>
+                <div x-show="uploading">
+                    <progress max="100" x-bind:value="progress"></progress>
                 </div>
-                <div class="">
-                    <div class="rounded-lg bg-gray-50 p-4">
-                        <!-- Current Profile Photo -->
-                        <div class="" x-show="!photoPreview">
-                            @if($img_path)
-                                <img src="{{ asset('storage/'.$img_path) }}" alt="{{ $img_path }}" class="rounded w-full max-w-sm aspect-video object-cover">
-                            @endif
-                        </div>
-                        <!-- New Profile Photo Preview -->
-                        <div class="" x-show="photoPreview" style="display: none;">
-                            <span class="block rounded w-full max-w-sm aspect-video bg-cover bg-no-repeat bg-center"
-                                x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
-                            </span>
-                        </div>
-                        <x-input-error for="photo" class="mt-2" />
-                    </div>
-                </div>
+                @if ($video)
+                    <p class="mt-4">Video Preview:</p>
+                    <video class="w-full" controls>
+                        <source src="{{ $video->temporaryUrl() }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                @endif
             </div>
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="$set('photoModal', false)" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$set('videoModal', false)" wire:loading.attr="disabled">
                 {{ __('Close') }}
             </x-secondary-button>
             <x-button class="ms-3" wire:click="save" wire:loading.attr="disabled">

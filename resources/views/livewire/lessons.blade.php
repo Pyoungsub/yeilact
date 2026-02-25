@@ -1,5 +1,4 @@
 <div class="">
-    {{--
     <div class="relative">
         @auth
             @if(auth()->user()->admin)
@@ -10,32 +9,33 @@
         @endauth
         <x-mp4 :source="$lesson_main_video" />
     </div>
+    {{--
+        <div class="pt-20 pb-8 grid sm:grid-cols-3 max-w-5xl mx-auto p-2 gap-2">
+            @foreach($lesson->purposes as $purpose)
+                @auth
+                    @if(auth()->user()->admin)
+                        <div class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $purpose->purpose_photo ? asset('storage/'.$purpose->purpose_photo->img_path ) :  asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+                            <a class="relative z-10" href="{{ route('purposes', ['lesson' => $lesson->lesson, 'purpose' => $purpose->purpose]) }}">
+                                <h2 class="text-3xl font-semibold text-white">{{ $purpose->purpose_ko }}</h2>
+                            </a>
+                            <button wire:click="modify({{ $purpose->id }})" class="relative border border-white text-white rounded px-2 z-10">수정</button>
+                        </div>
+                    @else
+
+                    @endif
+                @else
+                    <a class="" href="{{ route('purposes', ['lesson' => $lesson->lesson, 'purpose' => $purpose->purpose]) }}">
+                        <div class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $purpose->purpose_photo ? asset('storage/'.$purpose->purpose_photo->img_path ) :  asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+                            <h2 class="relative z-10 text-3xl font-semibold text-white">{{ $purpose->purpose_ko }}</h2>
+                        </div>
+                    </a>
+                @endauth
+            @endforeach
+        </div>
     --}}
     
-    <div class="pt-20 pb-8 grid sm:grid-cols-3 max-w-5xl mx-auto p-2 gap-2">
-        @foreach($lesson->purposes as $purpose)
-            @auth
-                @if(auth()->user()->admin)
-                    <div class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $purpose->purpose_photo ? asset('storage/'.$purpose->purpose_photo->img_path ) :  asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-                        <a class="relative z-10" href="{{ route('purposes', ['lesson' => $lesson->lesson, 'purpose' => $purpose->purpose]) }}">
-                            <h2 class="text-3xl font-semibold text-white">{{ $purpose->purpose_ko }}</h2>
-                        </a>
-                        <button wire:click="modify({{ $purpose->id }})" class="relative border border-white text-white rounded px-2 z-10">수정</button>
-                    </div>
-                @else
-
-                @endif
-            @else
-                <a class="" href="{{ route('purposes', ['lesson' => $lesson->lesson, 'purpose' => $purpose->purpose]) }}">
-                    <div class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $purpose->purpose_photo ? asset('storage/'.$purpose->purpose_photo->img_path ) :  asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-                        <h2 class="relative z-10 text-3xl font-semibold text-white">{{ $purpose->purpose_ko }}</h2>
-                    </div>
-                </a>
-            @endauth
-        @endforeach
-    </div>
     <x-dialog-modal wire:model.live="mainVideoModal" maxWidth="sm">
         <x-slot name="title">
             {{ __('메인영상 관리') }}

@@ -1,7 +1,7 @@
 <div class="bg-black">
     <div class="py-8 max-w-5xl mx-auto p-2">
         <div class="flex items-center justify-center gap-2">
-            <h1 class="text-4xl text-center text-white font-bold"><span class="text-red-700">Y</span>EIL {{$lesson->lesson_ko}} 영상</h1>
+            <h1 class="text-4xl text-center text-white font-bold"><span class="text-red-700">Y</span>EIL {{$lesson->lesson_ko}}</h1>
             @auth
                 @if(auth()->user()->admin)
                     <button wire:click="add" class="relative border border-white text-white rounded px-2 z-10">추가</button>
@@ -45,22 +45,24 @@
                 @endguest
             @endforeach
         </div>
-        <div class="mt-8 grid sm:grid-cols-3 gap-8">
-            @foreach($lesson->lesson_tuition_videos as $lesson_tuition_video)
-                <div class="relative">
-                    @auth
-                        @if(auth()->user()->admin)
-                            <div class="absolute flex right-2 top-2 gap-2 z-20">
-                                <button wire:click="modifyVideo({{ $lesson_tuition_video->id }})" class="relative border border-white text-white rounded px-2 z-10">수정</button>
-                                <button wire:click="deleteVideo({{ $lesson_tuition_video->id }})" class="relative border border-white text-white rounded px-2 z-10">삭제</button>
-                            </div>
-                        @endif
-                    @endauth
-                    <x-square-video :source="$lesson_tuition_video->video_path" />
-                    {{--<x-video source="{{ asset('storage/' . $lesson_tuition_video->video_path) }}" />--}}
-                </div>
-            @endforeach
-        </div>
+        {{--
+            <div class="mt-8 grid sm:grid-cols-3 gap-8">
+                @foreach($lesson->lesson_tuition_videos as $lesson_tuition_video)
+                    <div class="relative">
+                        @auth
+                            @if(auth()->user()->admin)
+                                <div class="absolute flex right-2 top-2 gap-2 z-20">
+                                    <button wire:click="modifyVideo({{ $lesson_tuition_video->id }})" class="relative border border-white text-white rounded px-2 z-10">수정</button>
+                                    <button wire:click="deleteVideo({{ $lesson_tuition_video->id }})" class="relative border border-white text-white rounded px-2 z-10">삭제</button>
+                                </div>
+                            @endif
+                        @endauth
+                        <x-square-video :source="$lesson_tuition_video->video_path" />
+                    </div>
+                @endforeach
+            </div>
+        --}}
+        
         {{--
             <div class="mt-8 grid sm:grid-cols-3 gap-8">
                 @foreach($lesson->lesson_tuition_youtubes as $youtube)
@@ -81,7 +83,7 @@
     </div>
     <x-dialog-modal wire:model.live="tuitionModal">
         <x-slot name="title">
-            {{ __('강사진 관리') }}
+            {{ __('이미지 추가') }}
         </x-slot>
         <x-slot name="content">
             <div class="grid sm:grid-cols-2 gap-8"
