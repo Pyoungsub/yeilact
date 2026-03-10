@@ -7,7 +7,7 @@
                 </p>
             </blockquote>
             <figcaption class="font-semibold">
-                <a href="https://www.instagram.com/yeil_academy" target="_blank" class="text-sky-500 dark:text-sky-400">
+                <a href="https://www.instagram.com/yeilactor" target="_blank" class="text-sky-500 dark:text-sky-400">
                     인스타그램 바로가기
                 </a>
             <div class="text-slate-700 dark:text-slate-500">
@@ -16,7 +16,7 @@
             </figcaption>
         </div>
         <div class="relative">
-            <a href="https://www.instagram.com/yeil_academy">
+            <a href="https://www.instagram.com/yeilactor">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" class="absolute -top-12 right-0 transform scale-110 -rotate-6 w-40 h-40">
                     <defs>
                         <linearGradient id="b">

@@ -12,7 +12,7 @@
             <span>카카오톡 상담</span>
         </a>
         <!--a  href="http://pf.kakao.com/_XIQku/chat">상담예약</a-->
-        <a class="h-full inline-flex flex-col items-center justify-center text-sm" href="https://www.instagram.com/yeil_academy">
+        <a class="h-full inline-flex flex-col items-center justify-center text-sm" href="https://www.instagram.com/yeilactor">
             <!--svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fill-none stroke-gray-500"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg-->
             <!--img src="{{asset('storage/company/booking.png')}}" alt="" class="mx-auto w-10 h-10"-->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" class="w-10 h-10">

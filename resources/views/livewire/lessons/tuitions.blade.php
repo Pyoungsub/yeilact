@@ -35,13 +35,17 @@
                         </div>
                     @else
                         <!-- Render as a <a> for non-admin users -->
-                        <a href="{{ $tuition->lesson_tuition_photo_url ? $tuition->lesson_tuition_photo_url->link : '#' }}" target="_blank" class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $tuition->img_path ? asset('storage/'.$tuition->img_path ) : asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy"></a>
+                            {{--
+                            <a href="{{ $tuition->lesson_tuition_photo_url ? $tuition->lesson_tuition_photo_url->link : '#' }}" target="_blank" class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $tuition->img_path ? asset('storage/'.$tuition->img_path ) : asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy"></a>
+                            --}}
+                            <div class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $tuition->img_path ? asset('storage/'.$tuition->img_path ) : asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy"></div>
                     @endif
                 @endauth
 
                 @guest
                     <!-- Render as a <a> for guests -->
-                    <a href="{{ $tuition->lesson_tuition_photo_url ? $tuition->lesson_tuition_photo_url->link : '#' }}" target="_blank" class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $tuition->img_path ? asset('storage/'.$tuition->img_path ) : asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy"></a>
+                    {{--<a href="{{ $tuition->lesson_tuition_photo_url ? $tuition->lesson_tuition_photo_url->link : '#' }}" target="_blank" class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $tuition->img_path ? asset('storage/'.$tuition->img_path ) : asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy"></a>--}}
+                    <div class="relative overflow-hidden rounded-2xl border w-full aspect-square bg-cover bg-no-repeat bg-center p-8 text-white" style="background-image:url({{ $tuition->img_path ? asset('storage/'.$tuition->img_path ) : asset('storage/company/7cf4958d5002916a5141c3b18de475d8.png') }}" loading="lazy"></div>
                 @endguest
             @endforeach
         </div>

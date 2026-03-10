@@ -2,9 +2,9 @@
     @foreach ($lessons as $lesson)
         <div class="mb-12">
             <div class="flex gap-2 items-center mb-4">
-                <h1 class="text-2xl font-bold">
+                <a href="{{route('lessons', ['lesson' => $lesson->lesson])}}" class="text-2xl font-bold">
                     {{ $lesson->lesson_ko }}
-                </h1>
+                </a>
                 @if($admin)
                     <x-button wire:click="addVideo({{ $lesson->id }})">
                         영상추가
@@ -15,11 +15,11 @@
                 x-data="{swiper:null}"
                 x-init="
                     swiper = new Swiper($refs.container, {
-                        slidesPerView: 1.3,
+                        slidesPerView: 2.3,
                         spaceBetween: 30,
                         breakpoints: {
                             640: { // sm breakpoint
-                                slidesPerView: 1.5,
+                                slidesPerView: 2.3,
                                 spaceBetween: 30,
                             },
                             768: { // md breakpoint

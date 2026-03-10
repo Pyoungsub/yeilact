@@ -23,7 +23,7 @@ class Lesson extends Model
     }
     public function lesson_tuition_photos()
     {
-        return $this->hasMany(LessonTuitionPhoto::class);
+        return $this->hasMany(LessonTuitionPhoto::class)->latest();
     }
     public function lesson_tuition_youtubes()
     {
@@ -35,6 +35,6 @@ class Lesson extends Model
     }
     public function lesson_tuition_videos()
     {
-        return $this->hasMany(LessonTuitionVideo::class);
+        return $this->hasMany(LessonTuitionVideo::class)->latest();
     }
 }

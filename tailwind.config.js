@@ -20,6 +20,9 @@ export default {
                 'xl': '0.675rem',
                 '2xl': '0.8rem',
             },
+            colors:{
+                'main': '#bf1e2e',
+            }
         },
     },
 
