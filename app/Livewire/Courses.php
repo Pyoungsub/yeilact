@@ -14,6 +14,8 @@ class Courses extends Component
     public $video;
     public $selected_lesson;
     public $videoModal;
+    public $editingVideo;
+    public $editMode = false;
     public function addVideo($id)
     {
         $this->selected_lesson = Lesson::find($id);
@@ -21,12 +23,52 @@ class Courses extends Component
     }
     public function save()
     {
-        $validated = $this->validate([ 
-            'video' => 'required',
+        $this->validate([
+            'video' => 'required'
         ]);
+
         $path = $this->video->storePublicly('tuitions', 'public');
-        $this->selected_lesson->lesson_tuition_videos()->create(['video_path' => $path]);
-        $this->reset(['videoModal', 'video', 'selected_lesson']);
+
+        if ($this->editMode && $this->editingVideo) {
+
+            // delete old file
+            if ($this->editingVideo->video_path &&
+                Storage::disk('public')->exists($this->editingVideo->video_path)) {
+
+                Storage::disk('public')->delete($this->editingVideo->video_path);
+            }
+
+            // update record
+            $this->editingVideo->update([
+                'video_path' => $path
+            ]);
+
+        } else {
+
+            // create new
+            $this->selected_lesson->lesson_tuition_videos()->create([
+                'video_path' => $path
+            ]);
+
+        }
+
+        $this->reset([
+            'videoModal',
+            'video',
+            'selected_lesson',
+            'editingVideo',
+            'editMode'
+        ]);
+    }
+    public function modifyIdolVideo($id)
+    {
+        if (!auth()->user()?->admin) {
+            abort(403);
+        }
+
+        $this->editingVideo = \App\Models\LessonTuitionVideo::findOrFail($id);
+        $this->editMode = true;
+        $this->videoModal = true;
     }
     public function deleteIdolVideo($id)
     {
@@ -43,6 +85,7 @@ class Courses extends Component
         // delete database record
         $video->delete();
     }
+    
     public function mount()
     {
         if(auth()->user() && auth()->user()->admin)
@@ -52,7 +95,10 @@ class Courses extends Component
     }
     public function render()
     {
-        $lessons = Lesson::with('mainpage_lesson_photos')->get();
+        $lessons = Lesson::with([
+            'mainpage_lesson_photos',
+            'lesson_tuition_videos'
+        ])->get();
         return view('livewire.courses', ['lessons' => $lessons]);
     }
 }

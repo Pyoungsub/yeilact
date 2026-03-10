@@ -71,7 +71,7 @@
     <!-- Token Value Modal -->
     <x-dialog-modal wire:model="videoModal">
         <x-slot name="title">
-           메인페이지 동영상 관리
+            {{ $editMode ? '영상 수정' : '메인페이지 동영상 관리' }}
         </x-slot>
 
         <x-slot name="content">
