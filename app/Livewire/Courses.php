@@ -28,6 +28,21 @@ class Courses extends Component
         $this->selected_lesson->lesson_tuition_videos()->create(['video_path' => $path]);
         $this->reset(['videoModal', 'video', 'selected_lesson']);
     }
+    public function deleteIdolVideo($id)
+    {
+        if (!auth()->user()?->admin) {
+            abort(403);
+        }
+        $video = \App\Models\LessonTuitionVideo::findOrFail($id);
+
+        // delete file from storage
+        if ($video->video_path && \Storage::disk('public')->exists($video->video_path)) {
+            \Storage::disk('public')->delete($video->video_path);
+        }
+
+        // delete database record
+        $video->delete();
+    }
     public function mount()
     {
         if(auth()->user() && auth()->user()->admin)
