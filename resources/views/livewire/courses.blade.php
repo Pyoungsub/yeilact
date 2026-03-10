@@ -45,7 +45,7 @@
                 <div x-ref="container" class="swiper w-full overflow-hidden">
                     <div class="swiper-wrapper">
                         @foreach($lesson->lesson_tuition_videos as $lesson_tuition_video)
-                            <div class="swiper-slide relative">
+                            <div class="swiper-slide relative" wire:key="video-{{ $lesson_tuition_video->id }}">
                                 @auth
                                     @if(auth()->user()->admin)
                                         <div class="flex items-cetner gap-2 absolute top-0 right-0 z-20">
