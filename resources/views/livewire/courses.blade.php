@@ -3,7 +3,7 @@
         <div class="mb-12">
             <div class="flex gap-2 items-center mb-4 justify-center">
                 <a href="{{route('lessons', ['lesson' => $lesson->lesson])}}" class="text-2xl font-bold text-blue-600 hover:text-blue-800 hover:underline transition">
-                    {{ $lesson->lesson_ko }}
+                    {{ $lesson->lesson_ko }} 커리큘럼
                 </a>
                 @if($admin)
                     <x-button wire:click="addVideo({{ $lesson->id }})">
