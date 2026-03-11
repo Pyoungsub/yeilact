@@ -1,11 +1,10 @@
 <div class="mt-12 max-w-5xl mx-auto">
     @foreach ($lessons as $lesson)
         <div class="mb-12">
-            <div class="flex gap-2 items-center mb-4 justify-center">
+            <div class="flex gap-2 items-center mb-4 px-2">
                 <a href="{{route('lessons', ['lesson' => $lesson->lesson])}}"
-                class="inline-flex items-center gap-2 px-6 py-3 text-lg font-bold text-white 
-                        bg-gradient-to-r from-blue-500 to-indigo-600 
-                        rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition">
+                class="inline-flex items-center gap-2 px-6 py-3 text-lg font-bold text-white border border-white
+                        rounded-xl shadow-lg">
                     ▶ {{ $lesson->lesson_ko }} 커리큘럼
                 </a>
                 @if($admin)
