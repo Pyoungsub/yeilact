@@ -9,8 +9,10 @@
     <livewire:audition />
     <x-promotion />
     @if(auth()->user()?->admin)
+        <livewire:tuitions />
         <livewire:facilities />
     @else
+        <x-tuitions />
         <x-facilities />
     @endif
     <x-instagram />
