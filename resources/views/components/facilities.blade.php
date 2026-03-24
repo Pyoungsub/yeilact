@@ -12,7 +12,7 @@
         });
     "
 >
-    <h1 class="text-2xl font-bold">시설소개</h1>
+    <h1 class="text-2xl font-bold text-white">시설소개</h1>
     <div x-ref="container" class="swiper w-full overflow-hidden">
         <div class="swiper-wrapper">
             @foreach($facilities as $facility)

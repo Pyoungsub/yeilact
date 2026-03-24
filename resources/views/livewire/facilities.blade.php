@@ -13,7 +13,7 @@
     "
     wire:ignore.self
 >
-    <div class="flex items-center justify-between"><h1 class="text-2xl font-bold">시설소개</h1><button wire:click="add">추가</button></div>
+    <div class="flex items-center justify-between text-white"><h1 class="text-2xl font-bold">시설소개</h1><button wire:click="add" class="border border-white">추가</button></div>
     <div x-ref="container" class="swiper w-full overflow-hidden">
         <div class="swiper-wrapper">
             @foreach($facilities as $facility )
