@@ -3,27 +3,27 @@
     x-init="
         swiper = new Swiper($refs.tuitions, {
             slidesPerView: 1.3,
-            spaceBetween: 30,
+            spaceBetween: 15,
             breakpoints: {
                 640: { // sm breakpoint
                     slidesPerView: 1.5,
-                    spaceBetween: 30,
+                    spaceBetween: 15,
                 },
                 768: { // md breakpoint
                     slidesPerView: 2.3,
-                    spaceBetween: 40,
+                    spaceBetween: 15,
                 },
                 1024: { // lg breakpoint
                     slidesPerView: 2.5,
-                    spaceBetween: 50,
+                    spaceBetween: 15,
                 },
                 1280: { // xl breakpoint
                     slidesPerView: 3.3,
-                    spaceBetween: 60,
+                    spaceBetween: 15,
                 },
                 1536: { // 2xl breakpoint
                     slidesPerView: 3.5,
-                    spaceBetween: 70,
+                    spaceBetween: 15,
                 }
             },
         });
