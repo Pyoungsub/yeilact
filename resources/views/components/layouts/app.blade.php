@@ -5,23 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <meta name="keywords" content="보컬 | 댄스 | 연기 | 목동">
-        <meta name="description" content="목동역 200평 규모 종합엔터 아카데미. #보컬 #댄스 #연기 한곳에 배우자. 무료체험 접수중">
+        <meta name="keywords" content="입시연기학원 | 예고입시연기 | 예고입시반 | 대학입시반 | 예고편입반 | 중등기초반 | 고등기초반 | 배우오디션반 | 연기학원 | 목동연기학원">
+        <meta name="description" content="예일연기학원은 예고입시, 대학입시, 예고편입 및 연기기초, 배우오디션준비까지 중·고등학생을 위한 전문 연기 교육을 제공합니다. 목동역 도보 3분거리의 200평 규모 최신 시설에서 체계적인 커리큘럼을 경험해보세요. 지금 무료체험수업 접수 중입니다.">
 
-        <meta name="thumbnail" content="https://www.yeilschool.co.kr/storage/company/present_img.jpg" alt="예일아카데미">
+        <meta name="thumbnail" content="https://www.yeilschool.co.kr/storage/company/present_img.jpg" alt="예일연기학원">
         <meta property="og:url" content="https://www.yeilschool.co.kr">
         <meta property="og:image" content="https://www.yeilschool.co.kr/storage/company/present_img.jpg">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="Yeil Academy">
         <meta property="og:locale" content="ko">
-        <meta property="og:title" content="예일아카데미 | #보컬 #댄스 #연기">
-        <meta property="og:description" content="목동역 200평 규모 종합엔터 아카데미. #보컬 #댄스 #연기 한곳에 배우자. 무료체험 접수중">
+        <meta property="og:title" content="예고입시·대학입시·기초연기반 | 예일연기학원">
+        <meta property="og:description" content="예일연기학원은 예고입시, 대학입시, 예고편입 및 연기기초, 배우오디션준비까지 중·고등학생을 위한 전문 연기 교육을 제공합니다. 목동역 도보 3분거리의 200평 규모 최신 시설에서 체계적인 커리큘럼을 경험해보세요. 지금 무료체험수업 접수 중입니다.">
         <meta property="og:country-name" content="ko">
 
-        <meta itemprop="name" content="예일아카데미">
+        <meta itemprop="name" content="예일연기학원">
         <meta itemprop="image" content="https://www.yeilschool.co.kr/storage/company/present_img.jpg">
         <meta itemprop="url" content="https://www.yeilschool.co.kr">
-        <meta itemprop="description" content="목동역 200평 규모 종합엔터 아카데미. #보컬 #댄스 #연기 한곳에 배우자. 무료체험 접수중">
+        <meta itemprop="description" content="예일연기학원은 예고입시, 대학입시, 예고편입 및 연기기초, 배우오디션준비까지 중·고등학생을 위한 전문 연기 교육을 제공합니다. 목동역 도보 3분거리의 200평 규모 최신 시설에서 체계적인 커리큘럼을 경험해보세요. 지금 무료체험수업 접수 중입니다.">
         <meta itemprop="keywords" content="all-smartphones-new">
         
         <!-- Fonts -->
