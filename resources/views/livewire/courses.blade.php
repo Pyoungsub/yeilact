@@ -1,7 +1,7 @@
 <div class="mt-12 max-w-5xl mx-auto">
     @foreach ($lessons as $lesson)
-        <div class="mb-12">
-            <div class="flex gap-2 items-center mb-4 px-2">
+        <div class="mb-4">
+            <div class="flex gap-2 items-center px-2">
                 <a href="{{route('lessons', ['lesson' => $lesson->lesson])}}"
                 class="inline-flex items-center gap-2 px-6 py-3 text-lg font-bold text-white border border-white
                         rounded-xl shadow-lg">
@@ -18,27 +18,27 @@
                 x-init="
                     swiper = new Swiper($refs.container, {
                         slidesPerView: 2.3,
-                        spaceBetween: 30,
+                        spaceBetween: 15,
                         breakpoints: {
                             640: { // sm breakpoint
                                 slidesPerView: 2.3,
-                                spaceBetween: 30,
+                                spaceBetween: 15,
                             },
                             768: { // md breakpoint
                                 slidesPerView: 2.3,
-                                spaceBetween: 30,
+                                spaceBetween: 15,
                             },
                             1024: { // lg breakpoint
                                 slidesPerView: 2.5,
-                                spaceBetween: 30,
+                                spaceBetween: 15,
                             },
                             1280: { // xl breakpoint
                                 slidesPerView: 3.3,
-                                spaceBetween: 30,
+                                spaceBetween: 15,
                             },
                             1536: { // 2xl breakpoint
                                 slidesPerView: 3.5,
-                                spaceBetween: 30,
+                                spaceBetween: 15,
                             }
                         },
                     });
