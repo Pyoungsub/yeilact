@@ -156,6 +156,8 @@
         </x-slot>
     </x-dialog-modal>
     <livewire:lessons.tuitions :$lesson />
+    <livewire:lessons.specials :$lesson />
+    <livewire:lessons.videos :$lesson />
     <x-footer.mobile-contact />
     <x-footer.web />
 </div>

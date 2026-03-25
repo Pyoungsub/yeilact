@@ -37,4 +37,12 @@ class Lesson extends Model
     {
         return $this->hasMany(LessonTuitionVideo::class)->latest();
     }
+    public function lesson_specials()
+    {
+        return $this->hasMany(LessonSpecial::class)->latest();
+    }
+    public function lesson_videos()
+    {
+        return $this->hasMany(LessonVideo::class)->latest();
+    }
 }
